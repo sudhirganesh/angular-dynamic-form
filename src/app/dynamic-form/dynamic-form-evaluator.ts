@@ -27,16 +27,26 @@ export class DynamicFormEvaluator {
       if (!rules || rules.length === 0) {
         return true;
       }
-  
-      if (condition === 'and') {
-        return rules.every(rule => this.evaluateRule(rule));
+      
+      let result = condition === 'and';
+      
+      let ruleResult = false;
+      for (const rule of rules) { 
+        ruleResult = this.evaluateRule(rule);
+      
+
+        if (condition === 'and') {
+          result = result && ruleResult;
+          if (!result) break;
+        } else if (condition === 'or') {
+          result = result || ruleResult;
+          if (result) break;
+        }
+        else {
+          throw new Error(`Unsupported condition: ${condition}`);
+        }
       } 
-      else if (condition === 'or') {
-        return rules.some(rule => this.evaluateRule(rule));
-      } 
-      else {
-        throw new Error(`Unsupported condition: ${condition}`);
-      }
+      return result;
     }
   }
   
