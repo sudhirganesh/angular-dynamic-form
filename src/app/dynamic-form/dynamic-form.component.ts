@@ -43,7 +43,7 @@ export class DynamicFormComponent implements OnInit {
   }
 
 //Method to validate conditional display of certain fields in the dynamic form
-  shouldDisplayField(field: Formfield): boolean {
+  shouldDisplayField(field: FormField): boolean {
 
       if (field.condition && field.rules) {
       const evaluator = new DynamicFormEvaluator(this.formData);
