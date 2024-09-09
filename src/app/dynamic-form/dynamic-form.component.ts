@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormService } from '../form-service.service';
 import { DynamicFormEvaluator } from './dynamic-form-evaluator';
+import { FormField } from '../form.interface';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class DynamicFormComponent implements OnInit {
   }
 
 //Method to validate conditional display of certain fields in the dynamic form
-  shouldDisplayField(field: any): boolean {
+  shouldDisplayField(field: Formfield): boolean {
 
       if (field.condition && field.rules) {
       const evaluator = new DynamicFormEvaluator(this.formData);
