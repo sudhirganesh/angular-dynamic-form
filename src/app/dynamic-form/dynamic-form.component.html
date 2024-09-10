@@ -2,7 +2,10 @@
   <div *ngFor="let control of formService.formStructure">
     <ng-container *ngIf="shouldDisplayField(control)" [formControlName]="control.name">
       <label>{{control.label}}<span *ngIf="control.validations">*</span></label>
-      <input [type]="control.type" formControlName="{{control.name}}">
+      <!-- <input [type]="control.type" formControlName="{{control.name}}"> -->
+      <input *ngIf="control.type === 'text'" type="text" formControlName="{{control.name}}">
+      <input *ngIf="control.type === 'date'" type="date" formControlName="{{control.name}}">
+      <input *ngIf="control.type === 'number'" type="number" formControlName="{{control.name}}">
       <select *ngIf="control.type === 'boolean'" formControlName="{{control.name}}" >
         <option *ngFor="let option of control.options" [value]="option">{{ option }}</option>
       </select>
